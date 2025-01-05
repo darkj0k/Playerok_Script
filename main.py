@@ -2,9 +2,10 @@ import json
 import time
 import logging
 from selenium import webdriver
-from selenium.common import WebDriverException
+from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
 from selenium.webdriver.chrome.options import Options
+from webdriver_manager.chrome import ChromeDriverManager
 
 
 class AutoReseller:
@@ -31,7 +32,7 @@ class AutoReseller:
         options = Options()
         options.debugger_address = "localhost:9222"
         try:
-            driver = webdriver.Chrome(options=options)
+            driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=options)
             return driver
         except Exception:
             print("Please start Chrome thought bash with parametres '--remote-debugging-port=9222' and login Playerok")
@@ -52,9 +53,9 @@ class AutoReseller:
     def check_completed_item(self):
         while True:
             self.logger.info("Checking for completed items...")
-            self.driver.get("https://playerok.com/profile/darkj0k/products")
+            self.driver.get(f"https://playerok.com/profile/{self.config['target_item']['user']}/products")
             time.sleep(5)
-            self.driver.get("https://playerok.com/profile/darkj0k/products/completed")
+            self.driver.get(f"https://playerok.com/profile/{self.config['target_item']['user']}/products/completed")
             time.sleep(5)
             number_completed = self.driver.find_element(By.CSS_SELECTOR,
                                                         self.config['classes']["number_completed"]).text
@@ -113,6 +114,7 @@ if __name__ == "__main__":
     parser.add_argument("--name", type=str, help="Name of the item to republish")
     parser.add_argument("--type", type=str, default="common", help="Type of item to republish")
     parser.add_argument("--max-retries", type=int, default=5, help="Maximum number of times to republish item")
+    parser.add_argument("--user", type=str, help="Username to show products")
     config_path = "config.json"
     args = parser.parse_args()
     with open(config_path, 'r') as config_read:
@@ -123,9 +125,12 @@ if __name__ == "__main__":
             config["target_item"]["type"] = args.type
         else:
             print("Type must be either 'common' or 'premium'")
+        config["target_item"]["user"] = args.user
         with open(config_path, 'w') as config_file:
             json.dump(config, config_file)
     if platform.system() == "Windows":
-        subprocess.run(['"C:\Program Files\Google\Chrome\Application\chrome.exe"', "--remote-debugging-port=9222"])
+        try:
+            subprocess.run(['"C:\Program Files\Google\Chrome\Application\chrome.exe"', "--remote-debugging-port=9222"])
+        except File
     bot = AutoReseller(config_path)
     bot.run()
