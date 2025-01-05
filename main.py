@@ -131,6 +131,10 @@ if __name__ == "__main__":
     if platform.system() == "Windows":
         try:
             subprocess.run(['"C:\Program Files\Google\Chrome\Application\chrome.exe"', "--remote-debugging-port=9222"])
-        except File
+        except Exception:
+            print("Please start Chrome thought bash with parametres '--remote-debugging-port=9222' and login Playerok")
+            input("Press Enter to continue...")
+            exit()
+
     bot = AutoReseller(config_path)
     bot.run()
