@@ -54,15 +54,15 @@ class AutoReseller:
         while True:
             self.logger.info("Checking for completed items...")
             self.driver.get(f"https://playerok.com/profile/{self.config['target_item']['user']}/products")
-            time.sleep(5)
+            time.sleep(30)
             self.driver.get(f"https://playerok.com/profile/{self.config['target_item']['user']}/products/completed")
-            time.sleep(5)
+            time.sleep(10)
             number_completed = self.driver.find_element(By.CSS_SELECTOR,
                                                         self.config['classes']["number_completed"]).text
-            if int(number_completed) == 1:
+            if int(number_completed) == int(self.config['target_item']['number_completed']):
                 item = self.driver.find_element(By.CLASS_NAME, self.config['classes']["item_name"])
             else:
-                time.sleep(5)
+                time.sleep(10)
                 continue
 
             title = item.find_element(By.CSS_SELECTOR, self.config['classes']['item_title']).text
@@ -105,37 +105,6 @@ class AutoReseller:
             self.logger.error(f"Failed to republish item: {str(e)}")
 
 
-if __name__ == "__main__":
-    import argparse
-    import platform
-    import subprocess
-
-    parser = argparse.ArgumentParser()
-    parser.add_argument("--name", type=str, help="Name of the item to republish")
-    parser.add_argument("--type", type=str, default="common", help="Type of item to republish")
-    parser.add_argument("--max-retries", type=int, default=5, help="Maximum number of times to republish item")
-    parser.add_argument("--user", type=str, help="Username to show products")
-    config_path = "config.json"
-    args = parser.parse_args()
-    with open(config_path, 'r') as config_read:
-        config = json.load(config_read)
-        config["target_item"]["name"] = args.name
-        config["target_item"]["max_retries"] = args.max_retries
-        if args.type == "common" or args.type == "premium":
-            config["target_item"]["type"] = args.type
-        else:
-            print("Type must be either 'common' or 'premium'")
-        config["target_item"]["user"] = args.user
-        with open(config_path, 'w') as config_file:
-            json.dump(config, config_file)
-    if platform.system() == "Windows":
-        try:
-            subprocess.run(['C:\Program Files\Google\Chrome\Application\chrome.exe', "--remote-debugging-port=9222"])
-        except Exception as ex:
-            logging.debug("Failed to start Chrome browser.", exc_info=ex)
-            print("Please start Chrome thought bash with parametres '--remote-debugging-port=9222' and login Playerok")
-            input("Press Enter to continue...")
-            exit()
-
-    bot = AutoReseller(config_path)
-    bot.run()
+config_path = "config.json"
+bot = AutoReseller(config_path)
+bot.run()

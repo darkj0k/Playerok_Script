@@ -1,1 +1,17 @@
-{"classes": {"number_completed": "#next-modal > div.MuiBox-root.mui-style-1i48s3q > div.MuiBox-root.mui-style-1r81v7d > div.MuiBox-root.mui-style-159csam > div > div > a.MuiTypography-root.MuiTypography-inherit.MuiLink-root.MuiLink-underlineAlways.active.mui-style-14yn4ig > div > p > span.MuiTypography-root.MuiTypography-14.mui-style-pwnbg9", "item_name": "MuiBox-root.mui-style-4g6ai3", "item_title": "div.MuiBox-root.mui-style-i6bazn > div > a", "republish_button": "#next-modal > div.MuiBox-root.mui-style-j7qwjs > div.MuiBox-root.mui-style-a285yo > div > div.MuiBox-root.mui-style-10vt5r9 > div.MuiBox-root.mui-style-1xb1989 > div.MuiStack-root.mui-style-1hqabo5 > button.MuiBox-root.mui-style-o1d96g", "common_button": "body > div.MuiModal-root.mui-style-1xkzkcs > div.MuiBox-root.mui-style-3uhxzk > div.MuiBox-root.mui-style-17kncur > div > div.MuiBox-root.mui-style-xvakb2 > label:nth-child(2)", "confirm_button": "body > div.MuiModal-root.mui-style-1xkzkcs > div.MuiBox-root.mui-style-3uhxzk > div.MuiBox-root.mui-style-n5f5kl > button"}, "target_item": {"name": null, "type": "common", "max_retries": 5}}
+{
+  "classes": {
+    "number_completed": "#next-modal > div.MuiBox-root.mui-style-1i48s3q > div.MuiBox-root.mui-style-1r81v7d > div.MuiBox-root.mui-style-159csam > div > div > a.MuiTypography-root.MuiTypography-inherit.MuiLink-root.MuiLink-underlineAlways.active.mui-style-14yn4ig > div > p > span.MuiTypography-root.MuiTypography-14.mui-style-pwnbg9",
+    "item_name": "MuiBox-root.mui-style-4g6ai3",
+    "item_title": "div.MuiBox-root.mui-style-i6bazn > div > a",
+    "republish_button": "#next-modal > div.MuiBox-root.mui-style-j7qwjs > div.MuiBox-root.mui-style-a285yo > div > div.MuiBox-root.mui-style-10vt5r9 > div.MuiBox-root.mui-style-1xb1989 > div.MuiStack-root.mui-style-1hqabo5 > button.MuiBox-root.mui-style-o1d96g",
+    "common_button": "body > div.MuiModal-root.mui-style-1xkzkcs > div.MuiBox-root.mui-style-3uhxzk > div.MuiBox-root.mui-style-17kncur > div > div.MuiBox-root.mui-style-xvakb2 > label:nth-child(2)",
+    "confirm_button": "body > div.MuiModal-root.mui-style-1xkzkcs > div.MuiBox-root.mui-style-3uhxzk > div.MuiBox-root.mui-style-n5f5kl > button"
+  },
+  "target_item": {
+    "name": "",
+    "type": "common",
+    "max_retries": 2,
+    "user": "darkj0k",
+    "number_completed": 1
+  }
+}
