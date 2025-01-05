@@ -60,23 +60,28 @@ class AutoReseller:
             number_completed = self.driver.find_element(By.CSS_SELECTOR,
                                                         self.config['classes']["number_completed"]).text
             if int(number_completed) == int(self.config['target_item']['number_completed']):
-                item = self.driver.find_element(By.CLASS_NAME, self.config['classes']["item_name"])
+                items = self.driver.find_elements(By.CLASS_NAME, self.config['classes']["item_name"])
             else:
                 time.sleep(10)
                 continue
-
-            title = item.find_element(By.CSS_SELECTOR, self.config['classes']['item_title']).text
-            if self.config['target_item']['name'].lower() == title.lower():
-                self.logger.info(f"Found {title} completed item.")
-                return item
+            completed_items_list = []
+            for item in items:
+                title = item.find_element(By.CSS_SELECTOR, self.config['classes']['item_title']).text
+                for name in self.config['target_item']['name']:
+                    if name.lower() == title.lower():
+                        self.logger.info(f"Found {title} completed item.")
+                        completed_items_list.append(item)
+            return completed_items_list
 
     def run(self):
         retries = 0
         max_retries = self.config['target_item']['max_retries']
         while retries < max_retries:
-            completed_item = self.check_completed_item()
-
-            self.republish_item(completed_item)
+            completed_items = self.check_completed_item()
+            for item in completed_items:
+                self.republish_item(item)
+                self.driver.get("https://playerok.com/profile/" + self.config['target_item']['user'] + "/products/completed")
+                time.sleep(10)
 
             retries += 1
             self.logger.info(f"Retry {retries}/{max_retries} completed.")
