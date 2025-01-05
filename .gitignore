@@ -1,3 +1,6 @@
 bot.log
 .venv/*
 .idea/*
+build/*
+dist/*
+main.spec

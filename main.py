@@ -130,8 +130,9 @@ if __name__ == "__main__":
             json.dump(config, config_file)
     if platform.system() == "Windows":
         try:
-            subprocess.run(['"C:\Program Files\Google\Chrome\Application\chrome.exe"', "--remote-debugging-port=9222"])
-        except Exception:
+            subprocess.run(['C:\Program Files\Google\Chrome\Application\chrome.exe', "--remote-debugging-port=9222"])
+        except Exception as ex:
+            logging.debug("Failed to start Chrome browser.", exc_info=ex)
             print("Please start Chrome thought bash with parametres '--remote-debugging-port=9222' and login Playerok")
             input("Press Enter to continue...")
             exit()
