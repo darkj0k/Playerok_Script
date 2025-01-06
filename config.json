@@ -8,7 +8,7 @@
     "confirm_button": "body > div.MuiModal-root.mui-style-1xkzkcs > div.MuiBox-root.mui-style-3uhxzk > div.MuiBox-root.mui-style-n5f5kl > button"
   },
   "target_item": {
-    "name": "",
+    "name": ["100 ГОЛДЫ | МОМЕНТАЛЬНО", "two"],
     "type": "common",
     "max_retries": 2,
     "user": "darkj0k",
